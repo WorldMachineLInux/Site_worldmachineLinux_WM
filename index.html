@@ -2,46 +2,218 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>World Machine Linux</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>World Machine Linux — официальный сайт</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background: #1a1a2e;
-            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #e0e0e0;
+            /* ЗДЕСЬ ТЫ МОЖЕШЬ ВСТАВИТЬ СВОЮ ССЫЛКУ НА ФОН */
+            background: url('https://shared.fastly.steamstatic.com/community_assets/images/items/2915460/203f335f493428cc1a8b5f550a5ed501e9b4330f.jpg') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
         }
+
+        /* Затемнение фона для читаемости текста */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.75);
+            z-index: -1;
+        }
+
         .container {
-            background: #16213e;
-            padding: 30px;
-            border-radius: 10px;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background-color: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(5px);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(160, 90, 250, 0.3);
         }
-        h1 { color: #ffcc00; }
-        .version { font-size: 24px; color: #4caf50; }
-        button {
-            background: #ffcc00;
-            color: #1a1a2e;
-            padding: 10px 20px;
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            text-align: center;
+            color: #a05afa;
+            text-shadow: 0 0 10px rgba(160, 90, 250, 0.5);
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .tagline {
+            text-align: center;
+            color: #b0b0b0;
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+            border-bottom: 1px solid #a05afa;
+            display: inline-block;
+            width: auto;
+            margin-left: auto;
+            margin-right: auto;
+            padding-bottom: 10px;
+        }
+
+        .version-card {
+            background: #0a0a0a;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 30px 0;
+            text-align: center;
+            border-left: 5px solid #a05afa;
+        }
+
+        .version-label {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #a05afa;
+        }
+
+        .version-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #ffffff;
+            line-height: 1.2;
+        }
+
+        .download-btn {
+            display: inline-block;
+            background: #a05afa;
+            color: #0a0a0a;
+            font-weight: bold;
+            padding: 14px 35px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin: 20px 0;
             border: none;
-            border-radius: 5px;
             cursor: pointer;
-            font-size: 16px;
+            box-shadow: 0 4px 15px rgba(160, 90, 250, 0.3);
+        }
+
+        .download-btn:hover {
+            background: #8a3be8;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(160, 90, 250, 0.4);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: #a05afa;
+            margin: 30px 0 15px 0;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #a05afa;
+            display: inline-block;
+        }
+
+        .changelog-list {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .changelog-list li {
+            background: rgba(160, 90, 250, 0.1);
+            margin: 10px 0;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border-left: 3px solid #a05afa;
+        }
+
+        .footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #777;
+            border-top: 1px solid #2a2a2a;
+            padding-top: 20px;
+        }
+
+        a {
+            color: #a05afa;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🌍 World Machine Linux</h1>
-        <p>Центр обновлений</p>
-        <div class="version">Версия: 1.0.0</div>
-        <p><button onclick="alert('Ссылка на MEGA будет здесь')">Скачать ISO</button></p>
-        <h3>Что нового:</h3>
-        <ul>
-            <li>Первая версия дистрибутива</li>
-            <li>KDE Plasma с темой OneShot</li>
-            <li>Rust-установщик</li>
-        </ul>
+        <h1>WORLD MACHINE LINUX</h1>
+        <div style="text-align: center;">
+            <div class="tagline">Современная операционная система для энтузиастов</div>
+        </div>
+
+        <div class="version-card">
+            <div class="version-label">ТЕКУЩАЯ ВЕРСИЯ</div>
+            <div class="version-number" id="version-number">1.0.0</div>
+            <div>
+                <a href="#" id="download-link" class="download-btn">СКАЧАТЬ ISO</a>
+            </div>
+            <div style="font-size: 0.8rem; margin-top: 10px; color: #aaa;">
+                Размер: 2.3 GB | Формат: ISO
+            </div>
+        </div>
+
+        <div>
+            <div class="section-title">ИСТОРИЯ ИЗМЕНЕНИЙ</div>
+            <ul class="changelog-list" id="changelog-list">
+                <li>Первая стабильная версия дистрибутива</li>
+                <li>KDE Plasma с темой оформления OneShot</li>
+                <li>Rust-установщик World Machine Installer</li>
+                <li>Автоопределение видеокарты и установка драйверов</li>
+                <li>Встроенный центр обновлений</li>
+            </ul>
+        </div>
+
+        <div class="footer">
+            <p>World Machine Linux — свободная операционная система</p>
+            <p>Сайт для встроенной службы обновлений | <a href="https://github.com/WorldMachineLinux/Site_worldmachineLinux_WM" target="_blank">GitHub</a></p>
+        </div>
     </div>
+
+    <script>
+        // ВСТАВЬ СЮДА ТВОЮ ССЫЛКУ НА MEGA (та, что начинается с https://mega.nz/file/...)
+        const MEGA_LINK = 'https://mega.nz/file/D4Q1jIDZ#DWRuO-sgLgP6SCurZN2a5jVjwKspQ4XsB27_ZR9KTqI';
+        
+        // Устанавливаем ссылку для скачивания
+        document.getElementById('download-link').href = MEGA_LINK;
+
+        // Здесь твоё приложение может подгружать свежую версию из version.json
+        fetch('version.json')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('version-number').innerText = data.version;
+                // Можно также обновить список изменений, если хочешь
+                if (data.changelog && data.changelog.length > 0) {
+                    const changelogList = document.getElementById('changelog-list');
+                    changelogList.innerHTML = '';
+                    data.changelog.forEach(item => {
+                        const li = document.createElement('li');
+                        li.textContent = item;
+                        changelogList.appendChild(li);
+                    });
+                }
+            })
+            .catch(error => {
+                console.log('Не удалось загрузить актуальную версию, отображается локальная.');
+            });
+    </script>
 </body>
 </html>
