@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>World Machine Linux — официальный сайт</title>
+    <meta name="description" content="World Machine Linux — operating system inspired by the game OneShot: World Machine Edition. KDE Plasma, OneShot theme, game optimizations.">
+    <title>World Machine Linux — OS inspired by OneShot: World Machine Edition</title>
     <style>
         * {
             margin: 0;
@@ -15,13 +16,11 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: #e0e0e0;
-            /* ЗДЕСЬ ТЫ МОЖЕШЬ ВСТАВИТЬ СВОЮ ССЫЛКУ НА ФОН */
             background: url('https://shared.fastly.steamstatic.com/community_assets/images/items/2915460/203f335f493428cc1a8b5f550a5ed501e9b4330f.jpg') no-repeat center center fixed;
             background-size: cover;
             min-height: 100vh;
         }
 
-        /* Затемнение фона для читаемости текста */
         body::before {
             content: "";
             position: fixed;
@@ -29,12 +28,12 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: rgba(0, 0, 0, 0.75);
+            background-color: rgba(0, 0, 0, 0.8);
             z-index: -1;
         }
 
         .container {
-            max-width: 900px;
+            max-width: 950px;
             margin: 0 auto;
             padding: 40px 20px;
             background-color: rgba(10, 10, 10, 0.85);
@@ -42,6 +41,31 @@
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             border: 1px solid rgba(160, 90, 250, 0.3);
+            position: relative;
+        }
+
+        /* Кнопка переключения языка */
+        .lang-switch {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: transparent;
+            color: #a05afa;
+            border: 2px solid #a05afa;
+            border-radius: 50px;
+            padding: 8px 16px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .lang-switch:hover {
+            background: #a05afa;
+            color: #0a0a0a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(160, 90, 250, 0.3);
         }
 
         h1 {
@@ -56,15 +80,22 @@
 
         .tagline {
             text-align: center;
-            color: #b0b0b0;
-            margin-bottom: 40px;
-            font-size: 1.1rem;
-            border-bottom: 1px solid #a05afa;
+            color: #d0d0d0;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+        
+        .game-badge {
+            text-align: center;
+            background: rgba(160, 90, 250, 0.15);
+            padding: 8px 15px;
+            border-radius: 50px;
             display: inline-block;
             width: auto;
-            margin-left: auto;
-            margin-right: auto;
-            padding-bottom: 10px;
+            margin: 0 auto 30px auto;
+            font-size: 0.9rem;
+            border: 1px solid #a05afa;
+            color: #c0c0c0;
         }
 
         .version-card {
@@ -151,63 +182,113 @@
         a:hover {
             text-decoration: underline;
         }
+
+        /* Скрытые классы для переключения языка */
+        .en {
+            display: block;
+        }
+        .ru {
+            display: none;
+        }
+        body.ru-lang .en {
+            display: none;
+        }
+        body.ru-lang .ru {
+            display: block;
+        }
     </style>
 </head>
 <body>
     <div class="container">
+        <button class="lang-switch" id="lang-switch">RUS</button>
+
         <h1>WORLD MACHINE LINUX</h1>
         <div style="text-align: center;">
-            <div class="tagline">Современная операционная система для энтузиастов</div>
+            <div class="tagline en">Operating system inspired by the game</div>
+            <div class="tagline ru">Операционная система, созданная по мотивам игры</div>
+            <div class="game-badge">🌐 ONESHOT: WORLD MACHINE EDITION</div>
         </div>
 
         <div class="version-card">
-            <div class="version-label">ТЕКУЩАЯ ВЕРСИЯ</div>
+            <div class="version-label en">CURRENT VERSION</div>
+            <div class="version-label ru">ТЕКУЩАЯ ВЕРСИЯ</div>
             <div class="version-number" id="version-number">1.0.0</div>
             <div>
-                <a href="#" id="download-link" class="download-btn">СКАЧАТЬ ISO</a>
+                <a href="#" id="download-link" class="download-btn en">DOWNLOAD ISO</a>
+                <a href="#" id="download-link-ru" class="download-btn ru">СКАЧАТЬ ISO</a>
             </div>
-            <div style="font-size: 0.8rem; margin-top: 10px; color: #aaa;">
+            <div style="font-size: 0.8rem; margin-top: 10px; color: #aaa;" class="en">
+                Size: 2.3 GB | Format: ISO
+            </div>
+            <div style="font-size: 0.8rem; margin-top: 10px; color: #aaa;" class="ru">
                 Размер: 2.3 GB | Формат: ISO
             </div>
         </div>
 
         <div>
-            <div class="section-title">ИСТОРИЯ ИЗМЕНЕНИЙ</div>
+            <div class="section-title en">CHANGELOG</div>
+            <div class="section-title ru">ИСТОРИЯ ИЗМЕНЕНИЙ</div>
             <ul class="changelog-list" id="changelog-list">
-                <li>Первая стабильная версия дистрибутива</li>
-                <li>KDE Plasma с темой оформления OneShot</li>
-                <li>Rust-установщик World Machine Installer</li>
-                <li>Автоопределение видеокарты и установка драйверов</li>
-                <li>Встроенный центр обновлений</li>
+                <li class="en">Full integration of "OneShot" theme into KDE Plasma</li>
+                <li class="ru">Полная интеграция темы оформления "OneShot" в KDE Plasma</li>
+                <li class="en">Rust-based World Machine Installer with automatic setup</li>
+                <li class="ru">Rust-установщик World Machine Installer с автоматической настройкой</li>
+                <li class="en">Automatic GPU detection and driver installation</li>
+                <li class="ru">Автоопределение видеокарты и установка драйверов</li>
+                <li class="en">Built-in update center and application store</li>
+                <li class="ru">Встроенный центр обновлений и магазин приложений</li>
+                <li class="en">Optimization for games and everyday tasks</li>
+                <li class="ru">Оптимизация для игр и повседневных задач</li>
             </ul>
         </div>
 
         <div class="footer">
-            <p>World Machine Linux — свободная операционная система</p>
-            <p>Сайт для встроенной службы обновлений | <a href="https://github.com/WorldMachineLinux/Site_worldmachineLinux_WM" target="_blank">GitHub</a></p>
+            <p class="en">World Machine Linux — a tribute to OneShot: World Machine Edition by Future Cat Games</p>
+            <p class="ru">World Machine Linux — дань уважения игре OneShot: World Machine Edition от Future Cat Games</p>
+            <p class="en">Free operating system | <a href="https://github.com/WorldMachineLinux/Site_worldmachineLinux_WM" target="_blank">GitHub</a></p>
+            <p class="ru">Свободная операционная система | <a href="https://github.com/WorldMachineLinux/Site_worldmachineLinux_WM" target="_blank">GitHub</a></p>
         </div>
     </div>
 
     <script>
-        // ВСТАВЬ СЮДА ТВОЮ ССЫЛКУ НА MEGA (та, что начинается с https://mega.nz/file/...)
         const MEGA_LINK = 'https://mega.nz/file/D4Q1jIDZ#DWRuO-sgLgP6SCurZN2a5jVjwKspQ4XsB27_ZR9KTqI';
-        
-        // Устанавливаем ссылку для скачивания
         document.getElementById('download-link').href = MEGA_LINK;
+        if (document.getElementById('download-link-ru')) {
+            document.getElementById('download-link-ru').href = MEGA_LINK;
+        }
 
-        // Здесь твоё приложение может подгружать свежую версию из version.json
+        // Переключение языка
+        const langSwitch = document.getElementById('lang-switch');
+        let isRussian = false;
+
+        langSwitch.addEventListener('click', () => {
+            isRussian = !isRussian;
+            if (isRussian) {
+                document.body.classList.add('ru-lang');
+                langSwitch.textContent = 'ENG';
+            } else {
+                document.body.classList.remove('ru-lang');
+                langSwitch.textContent = 'RUS';
+            }
+        });
+
+        // Загрузка версии из version.json
         fetch('version.json')
             .then(response => response.json())
             .then(data => {
                 document.getElementById('version-number').innerText = data.version;
-                // Можно также обновить список изменений, если хочешь
                 if (data.changelog && data.changelog.length > 0) {
                     const changelogList = document.getElementById('changelog-list');
                     changelogList.innerHTML = '';
                     data.changelog.forEach(item => {
                         const li = document.createElement('li');
                         li.textContent = item;
+                        li.className = 'en';
+                        const liRu = document.createElement('li');
+                        liRu.textContent = item; // Здесь нужен отдельный русский перевод, если есть
+                        liRu.className = 'ru';
                         changelogList.appendChild(li);
+                        changelogList.appendChild(liRu);
                     });
                 }
             })
