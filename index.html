@@ -161,6 +161,19 @@
         a:hover {
             text-decoration: underline;
         }
+        /* Скрытие элементов при переключении языка */
+        .en {
+            display: block;
+        }
+        .ru {
+            display: none;
+        }
+        body.ru-lang .en {
+            display: none;
+        }
+        body.ru-lang .ru {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -207,46 +220,31 @@
 <script>
     const MEGA_LINK = 'https://mega.nz/file/D4Q1jIDZ#DWRuO-sgLgP6SCurZN2a5jVjwKspQ4XsB27_ZR9KTqI';
     document.getElementById('download-link').href = MEGA_LINK;
-    if (document.getElementById('download-link-ru')) {
-        document.getElementById('download-link-ru').href = MEGA_LINK;
-    }
+    document.getElementById('download-link-ru').href = MEGA_LINK;
 
-    // Версия и список изменений (двуязычный)
     const versionData = {
         version: "1.0.0",
         changelog: {
             en: [
-                "✅ Added Rust-based graphical installer",
-                "✅ Full integration of OneShot theme into KDE Plasma",
-                "✅ Automatic GPU detection and driver installation",
-                "✅ Built-in update center and application store",
-                "✅ WiFi network selection during installation",
-                "✅ Package selection (Firefox, VLC, GIMP, Steam, Discord, VS Code)",
-                "✅ Timezone and keyboard layout selection"
+                "Added Rust-based graphical installer",
+                "Full integration of OneShot theme into KDE Plasma",
+                "Automatic GPU detection and driver installation",
+                "Built-in update center and application store",
+                "WiFi network selection during installation",
+                "Package selection (Firefox, VLC, GIMP, Steam, Discord, VS Code)",
+                "Timezone and keyboard layout selection"
             ],
             ru: [
-                "✅ Добавлен графический установщик на Rust",
-                "✅ Полная интеграция темы OneShot в KDE Plasma",
-                "✅ Автоопределение видеокарты и установка драйверов",
-                "✅ Встроенный центр обновлений и магазин приложений",
-                "✅ Выбор WiFi сети при установке",
-                "✅ Выбор пакетов (Firefox, VLC, GIMP, Steam, Discord, VS Code)",
-                "✅ Выбор часового пояса и раскладки клавиатуры"
+                "Добавлен графический установщик на Rust",
+                "Полная интеграция темы OneShot в KDE Plasma",
+                "Автоопределение видеокарты и установка драйверов",
+                "Встроенный центр обновлений и магазин приложений",
+                "Выбор WiFi сети при установке",
+                "Выбор пакетов (Firefox, VLC, GIMP, Steam, Discord, VS Code)",
+                "Выбор часового пояса и раскладки клавиатуры"
             ]
         }
     };
-
-    // Загружаем версию из version.json (если есть), иначе используем локальную
-    fetch('version.json')
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('version-number').innerText = data.version;
-            renderChangelog(data.changelog.en, data.changelog.ru);
-        })
-        .catch(() => {
-            document.getElementById('version-number').innerText = versionData.version;
-            renderChangelog(versionData.changelog.en, versionData.changelog.ru);
-        });
 
     function renderChangelog(enItems, ruItems) {
         const changelogList = document.getElementById('changelog-list');
@@ -264,6 +262,17 @@
             }
         });
     }
+
+    fetch('version.json')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('version-number').innerText = data.version;
+            renderChangelog(data.changelog.en, data.changelog.ru);
+        })
+        .catch(() => {
+            document.getElementById('version-number').innerText = versionData.version;
+            renderChangelog(versionData.changelog.en, versionData.changelog.ru);
+        });
 
     // Переключение языка
     const langSwitch = document.getElementById('lang-switch');
