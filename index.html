@@ -88,7 +88,6 @@
             color: #c0c0c0;
         }
 
-        /* Галерея */
         .gallery {
             margin: 30px 0 40px 0;
         }
@@ -108,12 +107,10 @@
         .env-name a {
             color: #a05afa;
             text-decoration: none;
-            transition: opacity 0.3s ease;
         }
 
         .env-name a:hover {
             text-decoration: underline;
-            opacity: 0.8;
         }
 
         .env-name.fade {
@@ -266,7 +263,6 @@
             text-decoration: none;
         }
 
-        /* Скрытие классов для переключения языка */
         .en {
             display: block;
         }
@@ -290,7 +286,6 @@
         <div class="game-badge">🌐 ONESHOT: WORLD MACHINE EDITION</div>
     </div>
 
-    <!-- Галерея -->
     <div class="gallery">
         <div class="gallery-header">
             <div class="env-name" id="env-name"></div>
@@ -305,7 +300,6 @@
         <div class="dots" id="dots"></div>
     </div>
 
-    <!-- Версия и скачивание -->
     <div class="version-card">
         <div class="version-label en">CURRENT VERSION</div>
         <div class="version-label ru">ТЕКУЩАЯ ВЕРСИЯ</div>
@@ -318,7 +312,6 @@
         <div class="ru">Размер: 990 MB | Формат: ISO</div>
     </div>
 
-    <!-- Changelog -->
     <div>
         <div class="section-title en">CHANGELOG</div>
         <div class="section-title ru">ИСТОРИЯ ИЗМЕНЕНИЙ</div>
@@ -334,24 +327,22 @@
 </div>
 
 <script>
-    // Ссылка на Mega (замени при необходимости)
-    const MEGA_LINK = 'https://mega.nz/file/D4Q1jIDZ#DWRuO-sgLgP6SCurZN2a5jVjwKspQ4XsB27_ZR9KTqI';
+    const MEGA_LINK = 'https://mega.nz/file/vk4wSKxb#6KMWh2m5K_7hTAOgWh75ax-VDrgf0KEPIyvRNenI0Xc';
     document.getElementById('download-link').href = MEGA_LINK;
     document.getElementById('download-link-ru').href = MEGA_LINK;
 
-    // Данные для галереи
     const environments = [
         {
             name: "KDE Plasma by capYT",
             name_ru: "KDE Plasma от capYT",
             author_link: "https://www.reddit.com/r/oneshot/comments/1r0qqvi/wme_plasma_kde_theme/",
-            image: "https://i.postimg.cc/1fC5qfDC/kde.png"
+            image: "https://i.ibb.co/LDjhnQVJ/kde.webp"
         },
         {
             name: "Hyprland by maxobur0001",
             name_ru: "Hyprland от maxobur0001",
             author_link: "https://www.reddit.com/r/unixporn/comments/1mi6cnn/hyprland_linux_world_machine_edition_oneshot/",
-            image: "https://i.postimg.cc/KRqvMRtf/hyprland.png"
+            image: "https://i.ibb.co/5gXX68ZF/hyprland.png"
         }
     ];
 
@@ -413,7 +404,6 @@
     createDots();
     updateContent();
 
-    // Переключение языка
     langSwitch.addEventListener('click', () => {
         isRussian = !isRussian;
         if (isRussian) {
@@ -424,10 +414,9 @@
             langSwitch.textContent = 'RUS';
         }
         updateContent();
-        renderChangelog(); // обновить changelog при смене языка
+        renderChangelog();
     });
 
-    // Версия и changelog
     const versionData = {
         version: "1.0.0",
         changelog: {
@@ -455,7 +444,6 @@
         changelogContainer.innerHTML = html;
     }
 
-    // Загрузка версии из version.json
     fetch('version.json')
         .then(response => response.json())
         .then(data => {
