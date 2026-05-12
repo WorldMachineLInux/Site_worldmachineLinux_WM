@@ -3,21 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>World Machine Linux — ОС по мотивам OneShot</title>
+    <title>World Machine Linux</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
         body {
+            background: #0a0a0a;
+            color: #e0e0e0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            color: #e0e0e0;
-            background: url('https://shared.fastly.steamstatic.com/community_assets/images/items/2915460/203f335f493428cc1a8b5f550a5ed501e9b4330f.jpg') no-repeat center center fixed;
-            background-size: cover;
             min-height: 100vh;
+            padding: 20px;
         }
+
         body::before {
             content: "";
             position: fixed;
@@ -25,268 +27,322 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: rgba(0, 0, 0, 0.8);
+            background: linear-gradient(135deg, rgba(160, 90, 250, 0.1) 0%, transparent 100%);
             z-index: -1;
         }
+
         .container {
-            max-width: 950px;
+            max-width: 1000px;
             margin: 0 auto;
-            padding: 40px 20px;
-            background-color: rgba(10, 10, 10, 0.85);
-            backdrop-filter: blur(5px);
+            background: #0f0f0f;
             border-radius: 20px;
+            padding: 30px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             border: 1px solid rgba(160, 90, 250, 0.3);
-            position: relative;
         }
-        .lang-switch {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: transparent;
+
+        h1 {
+            font-size: 2.5rem;
+            text-align: center;
             color: #a05afa;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #888;
+            margin-bottom: 30px;
+        }
+
+        /* Галерея */
+        .gallery {
+            margin: 30px 0;
+        }
+
+        .gallery-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .env-name {
+            font-size: 1.5rem;
+            color: #a05afa;
+            transition: opacity 0.3s ease;
+            display: inline-block;
+        }
+
+        .env-name.fade {
+            opacity: 0;
+        }
+
+        .gallery-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .gallery-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+
+        .gallery-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            border: 2px solid rgba(160, 90, 250, 0.5);
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .gallery-image img.fade {
+            opacity: 0;
+        }
+
+        .gallery-nav {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-btn {
+            background: transparent;
             border: 2px solid #a05afa;
-            border-radius: 50px;
-            padding: 8px 16px;
-            font-size: 0.9rem;
-            font-weight: bold;
+            color: #a05afa;
+            font-size: 2rem;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
             cursor: pointer;
             transition: all 0.3s ease;
-            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .lang-switch:hover {
+
+        .nav-btn:hover {
             background: #a05afa;
             color: #0a0a0a;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(160, 90, 250, 0.3);
+            transform: scale(1.1);
         }
-        h1 {
-            font-size: 3rem;
-            font-weight: 800;
+
+        .dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #333;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: #a05afa;
+            transform: scale(1.2);
+        }
+
+        /* Кнопка скачивания */
+        .download-section {
             text-align: center;
-            color: #a05afa;
-            text-shadow: 0 0 10px rgba(160, 90, 250, 0.5);
-            letter-spacing: 2px;
-            margin-bottom: 10px;
-        }
-        .tagline {
-            text-align: center;
-            color: #d0d0d0;
-            margin-bottom: 10px;
-            font-size: 1rem;
-        }
-        .game-badge {
-            text-align: center;
-            background: rgba(160, 90, 250, 0.15);
-            padding: 8px 15px;
-            border-radius: 50px;
-            display: inline-block;
-            width: auto;
-            margin: 0 auto 30px auto;
-            font-size: 0.9rem;
-            border: 1px solid #a05afa;
-            color: #c0c0c0;
-        }
-        .version-card {
-            background: #0a0a0a;
-            border-radius: 15px;
-            padding: 20px;
             margin: 30px 0;
-            text-align: center;
-            border-left: 5px solid #a05afa;
         }
-        .version-label {
-            font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: #a05afa;
-        }
-        .version-number {
-            font-size: 3rem;
-            font-weight: bold;
-            color: #ffffff;
-            line-height: 1.2;
-        }
+
         .download-btn {
             display: inline-block;
             background: #a05afa;
             color: #0a0a0a;
             font-weight: bold;
-            padding: 14px 35px;
+            padding: 15px 40px;
             font-size: 1.2rem;
             border-radius: 50px;
             text-decoration: none;
             transition: all 0.3s ease;
-            margin: 20px 0;
             border: none;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(160, 90, 250, 0.3);
         }
+
         .download-btn:hover {
             background: #8a3be8;
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(160, 90, 250, 0.4);
         }
-        .section-title {
-            font-size: 1.8rem;
+
+        /* Changelog */
+        .changelog-section h2 {
             color: #a05afa;
-            margin: 30px 0 15px 0;
-            padding-bottom: 5px;
+            margin-bottom: 15px;
             border-bottom: 2px solid #a05afa;
             display: inline-block;
+            padding-bottom: 5px;
         }
+
         .changelog-list {
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 15px;
             list-style: none;
-            margin: 20px 0;
+            margin-top: 15px;
         }
+
         .changelog-list li {
-            background: rgba(160, 90, 250, 0.1);
-            margin: 10px 0;
-            padding: 12px 15px;
-            border-radius: 8px;
-            border-left: 3px solid #a05afa;
+            padding: 8px 0;
+            border-bottom: 1px solid #2a2a2a;
         }
+
+        .changelog-list li:last-child {
+            border-bottom: none;
+        }
+
         .footer {
-            margin-top: 50px;
             text-align: center;
-            font-size: 0.8rem;
-            color: #777;
-            border-top: 1px solid #2a2a2a;
+            margin-top: 40px;
             padding-top: 20px;
+            border-top: 1px solid #2a2a2a;
+            font-size: 0.8rem;
+            color: #666;
         }
+
         a {
             color: #a05afa;
             text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        /* Скрытие элементов при переключении языка */
-        .en {
-            display: block;
-        }
-        .ru {
-            display: none;
-        }
-        body.ru-lang .en {
-            display: none;
-        }
-        body.ru-lang .ru {
-            display: block;
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <button class="lang-switch" id="lang-switch">RUS</button>
+    <h1>🌍 World Machine Linux</h1>
+    <div class="subtitle">Операционная система, вдохновлённая игрой OneShot: World Machine Edition</div>
 
-    <h1>WORLD MACHINE LINUX</h1>
-    <div style="text-align: center;">
-        <div class="tagline en">Operating system inspired by the game</div>
-        <div class="tagline ru">Операционная система, созданная по мотивам игры</div>
-        <div class="game-badge">🌐 ONESHOT: WORLD MACHINE EDITION</div>
+    <!-- Галерея -->
+    <div class="gallery">
+        <div class="gallery-header">
+            <div class="env-name" id="env-name">Hyprland by maxobur0001</div>
+        </div>
+        <div class="gallery-container">
+            <button class="nav-btn" id="prev-btn">‹</button>
+            <div class="gallery-image">
+                <img id="gallery-img" src="https://i.postimg.cc/KRqvMRtf/hyprland.png" alt="Hyprland">
+            </div>
+            <button class="nav-btn" id="next-btn">›</button>
+        </div>
+        <div class="dots" id="dots"></div>
     </div>
 
-    <div class="version-card">
-        <div class="version-label en">CURRENT VERSION</div>
-        <div class="version-label ru">ТЕКУЩАЯ ВЕРСИЯ</div>
-        <div class="version-number" id="version-number">1.0.0</div>
-        <div>
-            <a href="#" id="download-link" class="download-btn en">DOWNLOAD ISO</a>
-            <a href="#" id="download-link-ru" class="download-btn ru">СКАЧАТЬ ISO</a>
-        </div>
-        <div style="font-size: 0.8rem; margin-top: 10px; color: #aaa;" class="en">
-            Size: 2.3 GB | Format: ISO
-        </div>
-        <div style="font-size: 0.8rem; margin-top: 10px; color: #aaa;" class="ru">
-            Размер: 2.3 GB | Формат: ISO
-        </div>
+    <!-- Скачивание -->
+    <div class="download-section">
+        <a href="https://mega.nz/file/D4Q1jIDZ#DWRuO-sgLgP6SCurZN2a5jVjwKspQ4XsB27_ZR9KTqI" class="download-btn">📥 Скачать WMOS (Mega)</a>
     </div>
 
-    <div>
-        <div class="section-title en">CHANGELOG</div>
-        <div class="section-title ru">ИСТОРИЯ ИЗМЕНЕНИЙ</div>
-        <ul class="changelog-list" id="changelog-list"></ul>
+    <!-- Changelog -->
+    <div class="changelog-section">
+        <h2>История изменений</h2>
+        <div class="changelog-list" id="changelog">Загрузка...</div>
     </div>
 
     <div class="footer">
-        <p class="en">World Machine Linux — a tribute to OneShot: World Machine Edition by Future Cat Games</p>
-        <p class="ru">World Machine Linux — дань уважения игре OneShot: World Machine Edition от Future Cat Games</p>
-        <p class="en">Free operating system | <a href="https://github.com/WorldMachineLinux/Site_worldmachineLinux_WM" target="_blank">GitHub</a></p>
-        <p class="ru">Свободная операционная система | <a href="https://github.com/WorldMachineLinux/Site_worldmachineLinux_WM" target="_blank">GitHub</a></p>
+        <p>World Machine Linux — свободная операционная система</p>
+        <p>Built with ❤️ by capYT</p>
     </div>
 </div>
 
 <script>
-    const MEGA_LINK = 'https://mega.nz/file/D4Q1jIDZ#DWRuO-sgLgP6SCurZN2a5jVjwKspQ4XsB27_ZR9KTqI';
-    document.getElementById('download-link').href = MEGA_LINK;
-    document.getElementById('download-link-ru').href = MEGA_LINK;
-
-    const versionData = {
-        version: "1.0.0",
-        changelog: {
-            en: [
-                "Added Rust-based graphical installer",
-                "Full integration of OneShot theme into KDE Plasma",
-                "Automatic GPU detection and driver installation",
-                "Built-in update center and application store",
-                "WiFi network selection during installation",
-                "Package selection (Firefox, VLC, GIMP, Steam, Discord, VS Code)",
-                "Timezone and keyboard layout selection"
-            ],
-            ru: [
-                "Добавлен графический установщик на Rust",
-                "Полная интеграция темы OneShot в KDE Plasma",
-                "Автоопределение видеокарты и установка драйверов",
-                "Встроенный центр обновлений и магазин приложений",
-                "Выбор WiFi сети при установке",
-                "Выбор пакетов (Firefox, VLC, GIMP, Steam, Discord, VS Code)",
-                "Выбор часового пояса и раскладки клавиатуры"
-            ]
+    // Данные для галереи
+    const environments = [
+        {
+            name: "Hyprland by maxobur0001",
+            image: "https://i.postimg.cc/KRqvMRtf/hyprland.png"
+        },
+        {
+            name: "KDE Plasma by capYT",
+            image: "https://i.postimg.cc/1fC5qfDC/kde.png"
         }
-    };
+    ];
 
-    function renderChangelog(enItems, ruItems) {
-        const changelogList = document.getElementById('changelog-list');
-        changelogList.innerHTML = '';
-        enItems.forEach((item, index) => {
-            const liEn = document.createElement('li');
-            liEn.className = 'en';
-            liEn.textContent = item;
-            changelogList.appendChild(liEn);
-            if (ruItems && ruItems[index]) {
-                const liRu = document.createElement('li');
-                liRu.className = 'ru';
-                liRu.textContent = ruItems[index];
-                changelogList.appendChild(liRu);
+    let currentIndex = 0;
+    const envNameEl = document.getElementById('env-name');
+    const galleryImg = document.getElementById('gallery-img');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const dotsContainer = document.getElementById('dots');
+
+    // Создаём точки
+    function createDots() {
+        dotsContainer.innerHTML = '';
+        environments.forEach((_, index) => {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if (index === currentIndex) dot.classList.add('active');
+            dot.addEventListener('click', () => switchToIndex(index));
+            dotsContainer.appendChild(dot);
+        });
+    }
+
+    function updateDots() {
+        const dots = document.querySelectorAll('.dot');
+        dots.forEach((dot, index) => {
+            if (index === currentIndex) {
+                dot.classList.add('active');
+            } else {
+                dot.classList.remove('active');
             }
         });
     }
 
+    function switchToIndex(newIndex) {
+        if (newIndex === currentIndex) return;
+        
+        // Плавное затухание
+        envNameEl.classList.add('fade');
+        galleryImg.classList.add('fade');
+        
+        setTimeout(() => {
+            currentIndex = newIndex;
+            envNameEl.textContent = environments[currentIndex].name;
+            galleryImg.src = environments[currentIndex].image;
+            
+            setTimeout(() => {
+                envNameEl.classList.remove('fade');
+                galleryImg.classList.remove('fade');
+            }, 50);
+            updateDots();
+        }, 200);
+    }
+
+    function nextImage() {
+        const newIndex = (currentIndex + 1) % environments.length;
+        switchToIndex(newIndex);
+    }
+
+    function prevImage() {
+        const newIndex = (currentIndex - 1 + environments.length) % environments.length;
+        switchToIndex(newIndex);
+    }
+
+    prevBtn.addEventListener('click', prevImage);
+    nextBtn.addEventListener('click', nextImage);
+    
+    createDots();
+
+    // Загрузка changelog из version.json
     fetch('version.json')
-        .then(response => response.json())
+        .then(res => res.json())
         .then(data => {
-            document.getElementById('version-number').innerText = data.version;
-            renderChangelog(data.changelog.en, data.changelog.ru);
+            const changelogDiv = document.getElementById('changelog');
+            let html = `<strong>Версия ${data.version}</strong><br><br>`;
+            data.changelog.forEach(item => {
+                html += `<li>${item}</li>`;
+            });
+            changelogDiv.innerHTML = `<ul class="changelog-list">${html}</ul>`;
         })
         .catch(() => {
-            document.getElementById('version-number').innerText = versionData.version;
-            renderChangelog(versionData.changelog.en, versionData.changelog.ru);
+            document.getElementById('changelog').innerHTML = '<ul class="changelog-list"><li>Не удалось загрузить историю изменений</li></ul>';
         });
-
-    // Переключение языка
-    const langSwitch = document.getElementById('lang-switch');
-    let isRussian = false;
-    langSwitch.addEventListener('click', () => {
-        isRussian = !isRussian;
-        if (isRussian) {
-            document.body.classList.add('ru-lang');
-            langSwitch.textContent = 'ENG';
-        } else {
-            document.body.classList.remove('ru-lang');
-            langSwitch.textContent = 'RUS';
-        }
-    });
 </script>
 </body>
 </html>
